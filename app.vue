@@ -8,5 +8,6 @@ useSeoMeta({
 <template>
   <NuxtLayout>
     <NuxtPage />
+    <Toaster position="bottom-center" />
   </NuxtLayout>
 </template>
