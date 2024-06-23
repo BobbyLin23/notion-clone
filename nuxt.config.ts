@@ -1,3 +1,5 @@
+import process from 'node:process'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -7,10 +9,13 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/google-fonts',
     '@nuxtjs/color-mode',
+    '@vueuse/nuxt',
   ],
-  shadcn: {
-    prefix: '',
-    componentDir: './components/ui',
+  runtimeConfig: {
+    public: {
+      clerkPublishableKey: process.env.CLERK_PUBLISHABLE_KEY,
+    },
+    clerkSecretKey: process.env.CLERK_SECRET_KEY,
   },
   app: {
     head: {
@@ -36,7 +41,15 @@ export default defineNuxtConfig({
       prefix: 'Marketing',
     },
     '~/components',
+    {
+      path: '~/components/main',
+      prefix: 'Main',
+    },
   ],
+  shadcn: {
+    prefix: '',
+    componentDir: './components/ui',
+  },
   googleFonts: {
     families: {
       Poppins: [400, 600],
