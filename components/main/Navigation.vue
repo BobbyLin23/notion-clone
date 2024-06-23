@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import { ChevronsLeftIcon, MenuIcon } from 'lucide-vue-next'
+import { toast } from 'vue-sonner'
 import { cn } from '~/lib/utils'
+
+const router = useRouter()
 
 const isMobile = useMediaQuery('(max-width: 768px)')
 
@@ -69,6 +72,22 @@ function collapse() {
       isResetting.value = false
     }, 300)
   }
+}
+
+function handleCreate() {
+  const promise = useFetch('/api/documents', {
+    method: 'post',
+    body: {
+      title: 'Untitled',
+    },
+  })
+    .then(documentId => router.push(`/documents/${documentId}`))
+
+  toast.promise(promise, {
+    loading: 'Creating a new note...',
+    success: () => 'New note created!',
+    error: () => 'Failed to create a new note.',
+  })
 }
 
 watch(isMobile, () => {
