@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ChevronsLeftIcon, MenuIcon } from 'lucide-vue-next'
+import { ChevronsLeftIcon, MenuIcon, PlusCircle, Search, Settings } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
 import { cn } from '~/lib/utils'
 
@@ -115,7 +115,12 @@ watch(isMobile, () => {
       <ChevronsLeftIcon class="size-6" />
     </div>
 
-    <MainUserItem />
+    <div>
+      <MainUserItem />
+      <MainItem :icon="Search" label="Search" is-search :on-click="() => {}" />
+      <MainItem :icon="Settings" label="Settings" :on-click="() => {}" />
+      <MainItem :icon="PlusCircle" label="New Page" :on-click="handleCreate" />
+    </div>
 
     <div class="mt-4 flex-1">
       <p>Documents</p>

@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     const { title, parentDocument } = body
 
     if (!title) {
-      throw createError({
+      return createError({
         statusCode: 400,
         statusMessage: 'Title is required',
       })
@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
     const { userId } = getAuth(event)
 
     if (!userId) {
-      throw createError({
+      return createError({
         statusCode: 401,
         statusMessage: 'Unauthorized',
       })
